@@ -7,6 +7,8 @@ require("dotenv").config();
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent] });
 
+const keywords = process.env.KEYWORDS.split(' ');
+
 client.on("ready", () => {
     console.log(`Logged in as THE ${client.user.tag}!`)
 })
@@ -27,10 +29,18 @@ client.on("messageCreate", message => {
         .then( data => {
             // message.reply("Received message: " + message.content);
             const command = message.content;
-        
-            if (command.includes("affirm")) {
-                message.reply(data.affirmation);
+
+            for (var i = 0; i < keywords.length; i++)
+            {
+                console.log(`Check keyword ` + keywords[i]);
+                if (command.includes(keywords[i])) {
+                    console.log(`Keyword detected ` + keywords[i]);
+                    message.reply(data.affirmation);
+                    return;
+                }
             }
+        
+            console.log(`User message did not contain a keyword. Ignoring.`)
         }
     );
 })
