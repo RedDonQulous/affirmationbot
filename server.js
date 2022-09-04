@@ -32,9 +32,9 @@ client.on("messageCreate", message => {
 
             for (var i = 0; i < keywords.length; i++)
             {
-                console.log(`Check keyword ` + keywords[i]);
+                // console.log(`Check keyword ` + keywords[i]);
                 if (command.includes(keywords[i])) {
-                    console.log(`Keyword detected ` + keywords[i]);
+                    // console.log(`Keyword detected ` + keywords[i]);
                     message.reply(data.affirmation);
                     return;
                 }
